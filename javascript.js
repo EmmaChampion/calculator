@@ -61,10 +61,38 @@ function updateNumber(digit) {
     }
 }
 
+function updateOperator(current_operator) {
+    if (operatorEntered) {
+        if (operand2 === "") {
+            //Immediately changed operator, no calculation
+            operator = current_operator;
+        }
+        else {
+            //Compute the current operation and use result as operand1
+            let result = operate(operand1, operand2, operator);
+            displayWindow.textContent = result;
+            operand1 = result;
+            operand2 = "";
+            operator = current_operator;
+        }
+    }
+    else {
+        //Record operator and move to second operand
+        operator = current_operator;
+        operatorEntered = true;
+    }
+}
+
 const displayWindow = document.querySelector("#display-window");
 
 const numbers = document.querySelectorAll(".number");
 for (const number of numbers) {
     number.addEventListener("click", () => 
         updateNumber(number.innerText));
+}
+
+const operators = document.querySelectorAll(".operator");
+for (const operator_button of operators) {
+    operator_button.addEventListener("click", () =>
+        updateOperator(operator_button.innerText));
 }
