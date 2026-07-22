@@ -1,3 +1,76 @@
 body {
-    background-color: rgb(181, 136, 181);
+    background-color: rgba(181, 136, 181, 0.597);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+}
+
+#container {
+    height: 700px;
+    width: 500px;
+    box-sizing: border-box;
+    padding: 35px 10px 25px;
+    border: 3px solid lightsteelblue;
+    background-color: lightblue;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#display-window {
+    background-color: rgb(241, 238, 238);
+    box-sizing: border-box;
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    padding: 3px 8px;
+    width: 80%;
+    flex: 0 0 75px;
+    font-size: 3.5rem;
+    text-align: right;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 500px;
+    width: 80%;
+}
+
+#top-row, #middle-row, #bottom-row, #zero-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 25%;
+}
+
+button {
+    height: 60%;
+    width: 20%;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 15px;
+    background-color: rgb(241, 238, 238);
+}
+
+#top-row .number {
+    background-color: lightpink;
+}
+
+#middle-row .number {
+    background-color: lightyellow;
+}
+
+#bottom-row .number {
+    background-color: rgb(169, 219, 250);
+}
+
+#zero-row .number {
+    background-color: rgb(214, 181, 250);
 }
