@@ -71,9 +71,16 @@ function updateOperator(current_operator) {
             //Compute the current operation and use result as operand1
             let result = operate(operand1, operand2, operator);
             displayWindow.textContent = result;
-            operand1 = result;
-            operand2 = "";
-            operator = current_operator;
+            if (result === "ERROR") {
+                operand1 = "";
+                operand2 = "";
+                operatorEntered = false;
+            }
+            else {
+                operand1 = result;
+                operand2 = "";
+                operator = current_operator;
+            }
         }
     }
     else {
@@ -96,3 +103,7 @@ for (const operator_button of operators) {
     operator_button.addEventListener("click", () =>
         updateOperator(operator_button.innerText));
 }
+
+//TODO: Add clear button functionality
+//TODO: Add equals button functionality
+//TODO: Truncate decimal results to fit window
