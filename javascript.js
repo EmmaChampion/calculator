@@ -1,6 +1,7 @@
-let operand1;
-let operand2;
+let operand1 = "";
+let operand2 = "";
 let operator;
+let operatorEntered = false;
 
 function add(a, b) {
     return a + b;
@@ -23,6 +24,8 @@ function divide(a, b) {
 }
 
 function operate(operand1, operand2, operator) {
+    operand1 = Number(operand1);
+    operand2 = Number(operand2);
     switch (operator) {
         case "+":
             return add(operand1, operand2);
@@ -39,4 +42,29 @@ function operate(operand1, operand2, operator) {
         default:
             return "ERROR";
     }
+}
+
+function updateNumber(digit) {
+    if (operatorEntered) {
+        //Update operand2
+        if (operand2.length <= 12) {
+            operand2 = operand2 + digit;
+            displayWindow.textContent = operand2;
+        }
+    }
+    else {
+        //Update operand1
+        if (operand1.length < 12) {
+            operand1 = operand1 + digit;
+            displayWindow.textContent = operand1;
+        }
+    }
+}
+
+const displayWindow = document.querySelector("#display-window");
+
+const numbers = document.querySelectorAll(".number");
+for (const number of numbers) {
+    number.addEventListener("click", () => 
+        updateNumber(number.innerText));
 }
