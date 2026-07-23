@@ -107,6 +107,14 @@ function equalsCalc() {
     //Don't need to do anything if no operand selected
 }
 
+function clearCalcs() {
+    operand1 = "";
+    operand2 = "";
+    operator = "";
+    operatorEntered = false;
+    displayWindow.textContent = "0";
+}
+
 const displayWindow = document.querySelector("#display-window");
 
 const numbers = document.querySelectorAll(".number");
@@ -124,5 +132,5 @@ for (const operator_button of operators) {
 const equals = document.querySelector("#equals");
 equals.addEventListener("click", equalsCalc);
 
-//TODO: Add clear button functionality
-//TODO: Truncate decimal results to fit window
+const clear = document.querySelector("#clear");
+clear.addEventListener("click", clearCalcs);
