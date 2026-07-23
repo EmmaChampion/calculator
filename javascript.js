@@ -54,7 +54,11 @@ function updateNumber(digit) {
     }
     else {
         //Update operand1
-        if (operand1.length < 12) {
+        if (typeof operand1 === "number") {
+            operand1 = digit;
+            displayWindow.textContent = operand1;
+        }
+        else if (operand1.length < 12) {
             operand1 = operand1 + digit;
             displayWindow.textContent = operand1;
         }
@@ -68,19 +72,9 @@ function updateOperator(current_operator) {
             operator = current_operator;
         }
         else {
-            //Compute the current operation and use result as operand1
-            let result = operate(operand1, operand2, operator);
-            displayWindow.textContent = result;
-            if (result === "ERROR") {
-                operand1 = "";
-                operand2 = "";
-                operatorEntered = false;
-            }
-            else {
-                operand1 = result;
-                operand2 = "";
-                operator = current_operator;
-            }
+            equalsCalc();
+            operator = current_operator;
+            operatorEntered = true;
         }
     }
     else {
@@ -88,6 +82,29 @@ function updateOperator(current_operator) {
         operator = current_operator;
         operatorEntered = true;
     }
+}
+
+function equalsCalc() {
+    if (operatorEntered) {
+        let result = operate(operand1, operand2, operator);
+        if (result.toString().length > 12) {
+            displayWindow.textContent = result.toExponential(6);
+        }
+        else {
+            displayWindow.textContent = result;
+        }
+        if (result === "ERROR") {
+            operand1 = "";
+            operand2 = "";
+            operatorEntered = false;
+        }
+        else {
+            operand1 = result;
+            operand2 = ""
+            operatorEntered = false;
+        }
+    }
+    //Don't need to do anything if no operand selected
 }
 
 const displayWindow = document.querySelector("#display-window");
@@ -104,6 +121,8 @@ for (const operator_button of operators) {
         updateOperator(operator_button.innerText));
 }
 
+const equals = document.querySelector("#equals");
+equals.addEventListener("click", equalsCalc);
+
 //TODO: Add clear button functionality
-//TODO: Add equals button functionality
 //TODO: Truncate decimal results to fit window
