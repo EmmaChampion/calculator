@@ -104,7 +104,9 @@ function equalsCalc() {
             operatorEntered = false;
         }
     }
-    //Don't need to do anything if no operand selected
+    else {
+        operand1 = Number(operand1);
+    }
 }
 
 function clearCalcs() {
